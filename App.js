@@ -1,61 +1,76 @@
-import React from "react";
-import {View, Text, SafeAreaView} from 'react-native'
+import * as React from 'react';
+import {StyleSheet, View, Text, Button, SafeAreaView} from 'react-native'
+
+// Used for page naviagation 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+
+const Stack = createNativeStackNavigator();
+
+const HomeScreen = ({ navigation }) => {
+  return (
+    <>
+      <Button
+      title="Go to Main Feed"
+      onPress={() =>
+        navigation.navigate('MainFeed', { name: 'Main Feed' })
+      }
+      />
+      <Button
+      title="Login"
+      onPress={() =>
+        navigation.navigate('Login', { name: 'Login' })
+      }
+      />
+      <Button
+      title="Create An Account"
+      onPress={() =>
+        navigation.navigate('Sign Up', { name: 'Create Account' })
+      }
+      />
+    </>
+  );
+};
+const ProfileScreen = ({ navigation, route }) => {
+  return <Text>This is {route.params.name}'s profile</Text>;
+};
+
+const MainFeed = ({ navigation, route }) => {
+  return <Text>This is the {route.params.name}.</Text>;
+};
+
+const Login = ({ navigation, route }) => {
+  return <Text>This is the {route.params.name}.</Text>;
+};
+
+const SignUp = ({ navigation, route }) => {
+  return <Text>This is {route.params.name}.</Text>;
+};
 
 const App = () => {
-
-  state = {
-    // ==== Seeded through the backend api ====
-    users: [],
-    plants: [],
-    stories: [],
-    collections: [],
-    likes: [],
-    posts: [],
-    comments: [],
-    // ==== Auth/User data ====
-    username: "",
-    password: "",
-    currentUser: {},
-    currentAvatar: null,
-    userStories: [],
-    userCollections: [],
-    userPosts: [],
-    // sign up
-    name: '',
-    email: '',
-    passwordConfirm: '',
-
-    // ==== Create ====
-    // Collection
-    collectionName: "",
-    collectionDescription: "",
-    // Story
-    plantNickname: "",
-    acquiredOn: '03/21/1997',
-    commonName: "",
-    latinName: "",
-    collectionID: '',
-    // Post
-    photo: {},
-    caption: "",
-    storyId: '',
-    // Comment
-    commentPostId: null,
-    comment: '',
-    // Search
-    searchTerm: '',
-    //Stepper
-    activeStep: 0,
-  };
   
   return (
     
-    <SafeAreaView>
-      <Text>
-        Plant Story
-      </Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'PlantStory' }}
+        />
+        <Stack.Screen name="MainFeed" component={MainFeed}/>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Sign Up" component={SignUp} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+});
 
 export default App;
