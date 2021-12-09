@@ -5,33 +5,11 @@ import {StyleSheet, View, Text, Button, SafeAreaView} from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+// Containers
+import Welcome from './components/welcome/Welcome';
 
 const Stack = createNativeStackNavigator();
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <>
-      <Button
-      title="Go to Main Feed"
-      onPress={() =>
-        navigation.navigate('MainFeed', { name: 'Main Feed' })
-      }
-      />
-      <Button
-      title="Login"
-      onPress={() =>
-        navigation.navigate('Login', { name: 'Login' })
-      }
-      />
-      <Button
-      title="Create An Account"
-      onPress={() =>
-        navigation.navigate('Sign Up', { name: 'Create Account' })
-      }
-      />
-    </>
-  );
-};
 const ProfileScreen = ({ navigation, route }) => {
   return <Text>This is {route.params.name}'s profile</Text>;
 };
@@ -51,19 +29,20 @@ const SignUp = ({ navigation, route }) => {
 const App = () => {
   
   return (
-    
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{ title: 'PlantStory' }}
-        />
-        <Stack.Screen name="MainFeed" component={MainFeed}/>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Sign Up" component={SignUp} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Welcome}
+            options={{ title: 'PlantStory' }}
+          />
+          <Stack.Screen name="MainFeed" component={MainFeed}/>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Sign Up" component={SignUp} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   )
 }
 
